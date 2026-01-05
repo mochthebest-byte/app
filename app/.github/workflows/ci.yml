@@ -1,3 +1,7 @@
+concurrency:
+  group: ghcr-${{ github.ref }}
+  cancel-in-progress: true
+
       - name: Build Docker image (SHA + latest)
         run: |
           docker build \
@@ -9,4 +13,3 @@
         run: |
           docker push ghcr.io/mochthebest-byte/app:${{ github.sha }}
           docker push ghcr.io/mochthebest-byte/app:latest
-# force change понеділок, 5 січня 2026 22:22:49 +0200
