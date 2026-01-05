@@ -1,9 +1,12 @@
-name: CI Build Test Docker
+name: CI Build Test Push
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   build:
@@ -19,13 +22,24 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: |
-          pip install -r app/requirements.txt
+        run: pip install -r app/requirements.txt
 
       - name: Run tests
-        run: |
-          pytest app
+        run: pytest app
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
         run: |
-          docker build -t myapp:${{ github.sha }} app
+          docker build \
+            -t ghcr.io/${{ github.repository }}:${{ github.sha }} \
+            app
+
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
