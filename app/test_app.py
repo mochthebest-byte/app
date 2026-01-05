@@ -1,4 +1,7 @@
-from app import hello
+from app import app
 
-def test_hello():
-    assert hello() == "Hello from docker-compose!"
+def test_root():
+    client = app.test_client()
+    r = client.get("/")
+    assert r.status_code == 200
+    assert b"Hello from Docker + GHCR!" in r.data
