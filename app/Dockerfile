@@ -1,7 +1,9 @@
 FROM python:3.12-slim
 
+RUN useradd -m appuser
+USER appuser
+
 WORKDIR /app
 COPY app.py .
-RUN pip install flask
 
 CMD ["python", "app.py"]
