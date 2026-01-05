@@ -12,3 +12,8 @@
 - Build and push Docker image to GHCR
 - Image tagging with commit SHA
 - Traceability and rollback readiness
+## Day 16
+- Continuous Deployment fundamentals
+- Local deployment from registry
+- Versioned image updates
+- Image-based rollback
