@@ -9,4 +9,8 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"OK\n")
 
-HTTPServer((HOST, PORT), Handler).serve_forever()
+def main():
+    HTTPServer((HOST, PORT), Handler).serve_forever()
+
+if __name__ == "__main__":
+    main()
