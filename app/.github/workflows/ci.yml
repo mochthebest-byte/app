@@ -9,3 +9,4 @@
         run: |
           docker push ghcr.io/mochthebest-byte/app:${{ github.sha }}
           docker push ghcr.io/mochthebest-byte/app:latest
+# force change понеділок, 5 січня 2026 22:22:49 +0200
